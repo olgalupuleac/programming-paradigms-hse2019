@@ -24,6 +24,6 @@ def verbing(s):
 def remove_adjacent(lst):
     res = []
     for elem in lst:
-        if not res or elem != res[-1]:
+        if elem != res[-1]:
             res.append(elem)
     return res
