@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 
+# Given a list of strings return the list
+# which contains these strings in lowercase.
+# Example: ['AA', 'bB'] -> ['aa', 'bb']
+# Hint: you can use s.lower()
+def to_lowercase(l):
+    pass
+    # your code here
+
 # Given a string, if its length is at least 3,
 # add 'ing' to its end.
 # Unless it already ends in 'ing', in which case
