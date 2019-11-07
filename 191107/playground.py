@@ -24,11 +24,29 @@ def verbing(s):
 def remove_adjacent(lst):
     res = []
     for elem in lst:
-        if elem != res[-1]:
+        if not res or elem != res[-1]:
             res.append(elem)
     return res
 
-print('hello')
 
-#if __name__ == '__main__':
-#    remove_adjacent([1, 1, 2, 1])
+# Merge two sorted lists in one sorted list in linear time
+#
+# Example input: [2, 4, 6], [1, 3, 5]
+# Example output: [1, 2, 3, 4, 5, 6]
+def linear_merge(lst1, lst2):
+    res = []
+    len1 = len(lst1)
+    len2 = len(lst2)
+    pos1 = pos2 = 0
+    while pos1 < len1 or pos2 < len2:
+        if pos1 < len1 and (pos2 == len2 or lst1[pos1] < lst2[pos2]):
+            res.append(lst1[pos1])
+            pos1 += 1
+        else:
+            res.append(lst1[pos2])
+            pos2 += 1
+    return res
+
+
+if __name__ == '__main__':
+    print(*linear_merge([1, 2], [2, 3]))
