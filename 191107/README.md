@@ -38,7 +38,7 @@
 
 ### Лирическое отступление про качество и стиль кода
 
-Частично взято из [этой статьи][https://realpython.com/python-code-quality/#what-is-code-quality] + мои мысли на тему.
+Частично взято из [этой статьи](https://realpython.com/python-code-quality/#what-is-code-quality) + мои мысли на тему.
 
 #### Что такое хороший код?
 
