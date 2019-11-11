@@ -88,7 +88,7 @@ flake8 --max-line-length=100 .
 pylint --max-line-length=100 --disable=invalid-name,missing-docstring,global-statement,too-many-lines,R --enable=simplifiable-if-statement,redefined-variable-type *.py
 ```
 
-В целом, `pylint` и `flake8` часто находят одни и те же ошибки. Про то, чем они отличаются можно почитать [тут][https://www.reddit.com/r/Python/comments/82hgzm/any_advantages_of_flake8_over_pylint/] или [тут][https://www.slant.co/versus/12630/12632/~pylint_vs_flake8].
+В целом, `pylint` и `flake8` часто находят одни и те же ошибки. Про то, чем они отличаются можно почитать [тут](https://www.reddit.com/r/Python/comments/82hgzm/any_advantages_of_flake8_over_pylint/) или [тут](https://www.slant.co/versus/12630/12632/~pylint_vs_flake8).
 
 ### mypy
 
