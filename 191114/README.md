@@ -140,3 +140,34 @@ git add a.txt
 git commit --amend
 ```
 
+18) Редактируем сообщение об ошибке, вместо "Add b to a.txt" вводим "Add bbbb to a.txt"
+
+19) Коммит изменился. Смотрим `git log`
+
+20) Мы хотим проверить, что у нас есть нужные изменения. Для этого 
+
+```shell
+git diff <commit-hash>
+```
+
+21) Вообще, по умолчанию, `git diff` показывает разницу между working directory и staged area. Давайте проверим.
+
+```shell
+echo cc > b.txt
+git diff
+```
+
+22) Если мы добавим файл в staging area, то `git diff` ничего не выведет.
+
+```shell
+git add b.txt
+git diff
+```
+
+23) Чтобы посмотреть разницу между staging area и репозиторием, есть ключ `--staged`
+
+```shell
+git diff --staged
+```
+
+24) Мы хотим теперь вернуть файл b.txt как он был.
