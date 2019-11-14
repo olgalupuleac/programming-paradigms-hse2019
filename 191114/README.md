@@ -1,5 +1,7 @@
 # Практика про git
 
+## Это буду показывать я
+
 1) Создаём где-нибудь папку, с которой будем эксперементировать и переходим в неё.
 
 ```shell
@@ -48,8 +50,6 @@ echo aaaa > a.txt
 type nul > a.txt
 echo aaaa > a.txt
 ```
-
-
 
 5) Проверяем состояние нашего репозитория
 
@@ -199,5 +199,134 @@ git status
 git checkout -- a.txt
 ```
 
-28) Теперь хотим создать новую ветку. 
+28) Теперь хотим создать новую ветку, назовём её `hw1`.  Для этого либо
 
+```shell
+git branch hw1
+git checkout hw1
+```
+
+либо
+
+```shell
+git checkout -b hw1
+```
+
+29) Смотрим, что у нас тут есть.
+
+```shell
+git status
+git log
+```
+
+30) Создаём папочку `hw1`, переходим в неё.
+
+```shell
+mkdir hw1
+cd hw1
+```
+
+31) Хотим писать код на питоне.
+
+```shell
+touch hello_world.py
+notepad++ hello_world.py
+git add hello_world.py
+git commit -m "Print 'hello world'"
+notepad++ hello_world.py
+```
+
+32) Тут нас отвлекли и сказали, что нам нужно исправить баг в master, делает `git stash` и переключаемся в master.
+
+```shell
+git stash
+git checkout master
+```
+
+Меняем что-нибудь, коммитим изменения.
+
+33) Переключаемся обратно в hw1, возвращаем нашу заначку.
+
+```shell
+git checkout hw1
+git stash pop
+```
+
+## Это будете делать вы (вместе со мной)
+
+1) Открываем [https://github.com/git-demo-practice/git-demo](https://github.com/git-demo-practice/git-demo). Я показываю, что там есть (например, .gitignore).
+
+2) Делаем fork.
+
+3) Клонируем ваш репозиторий себе на github (**не копипастить**).
+
+```shell
+git clone https://github.com/olgalupuleac/git-demo.git
+```
+
+4) Как взять оттуда изменения (показываю я).
+
+```shell
+git remote -v
+git remote add upstream https://github.com/git-demo-practice/git-demo
+git fetch upstream
+git merge upstream/master
+```
+
+5) Создаём ветку `hw1`
+
+```shell
+git checkout -b hw1
+```
+
+6) По очереди реализуем функции в файле hw1/calculator.py, для каждой реализованной функции делаем коммит.
+
+7) Отправляем всё на github.
+
+```shell
+git push -u origin hw1
+```
+
+8) Создаём pull request в исходный репозиторий.
+
+9) Теперь пойдём выполнять второе дз. **Переключаемся на ветку master**.
+
+```shell
+git checkout master
+```
+
+10) Теперь переключаемся на новую ветку hw2.
+
+```shell
+git checkout -b hw2
+```
+
+11) Реализуем функцию внутри файла hw2/strings.py
+
+12) Коммитим изменения. 
+
+13) Отправляем изменения, создаём pull request.
+
+```shell
+git push -u origin hw2
+```
+
+14) Теперь допустим нам пришли замечания по первому дз, давайте править
+
+```shell
+git checkout hw1
+```
+
+15) Поправили, закоммитили, отправляем изменения.
+
+```shell
+git push
+```
+
+## ДЗ
+
+1) Упражнения [https://pb-fall2019.yeputons.net/](https://pb-fall2019.yeputons.net/). Я показываю.
+
+2) Чистая история.
+
+3) Вопрос про дедлайны.
