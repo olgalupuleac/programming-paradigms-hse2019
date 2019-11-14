@@ -271,6 +271,7 @@ git remote -v
 git remote add upstream https://github.com/git-demo-practice/git-demo
 git fetch upstream
 git merge upstream/master
+git push origin master
 ```
 
 5) Создаём ветку `hw1`
@@ -330,3 +331,20 @@ git push
 2) Чистая история.
 
 3) Вопрос про дедлайны.
+
+## Доп фичи
+
+1) Красивый вывод лога.
+
+```shell
+git log --graph --branches --tags --all --pretty=oneline --decorate --abbrev-commit --reflog
+```
+
+2) Сохранение команды
+
+```shell
+git config --global alias.pretty-log 'log --graph --branches --tags --all --pretty=oneline --decorate --abbrev-commit --reflog'
+```
+
+3) Показываем, как работает `.gitignore`.
+
