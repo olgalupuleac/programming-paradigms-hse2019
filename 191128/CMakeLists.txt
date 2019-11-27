@@ -6,4 +6,6 @@ set(THREADS_PREFER_PTHREAD_FLAG TRUE)
 find_package(Threads REQUIRED)
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
 
-add_executable(191128 main.cpp)
+add_executable(191128 src/main.cpp)
+target_link_libraries(${PROJECT_NAME} Threads::Threads)
+
