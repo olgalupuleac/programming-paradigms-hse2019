@@ -27,7 +27,9 @@ int main() {
 ```
 1. Запускать можно одним из следующих способов:
     1. Из командной строки при помощи `gcc` (в директории с файлом `main.cpp`).
-`g++ main.cpp -pthread -g -Wall -Wextra -Werror -o main` 
+```
+g++ main.cpp -pthread -g -Wall -Wextra -Werror -o main
+``` 
     1. При помощи `cmake` 
  ```
 cmake .
