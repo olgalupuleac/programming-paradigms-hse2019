@@ -71,5 +71,79 @@ int main() {
     return 0;
 }
 ```
-2. Запустите программу, посмотрите, что выводится.
+2. Пересоберите программу и запустите, посмотрите, что выводится.
 3. Запустите под `valgrind`.
+
+### Только чётные
+1. Измените программу так, чтобы выводились только чётные числа.
+```c++
+#include <assert.h>
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+const int N = 500000000;
+const int M = 10000;
+
+int data;
+void* worker(void*) {
+    for (int i = 0; i < N; i++) {
+        data++;
+    }
+    return NULL;
+}
+
+int main() {
+    pthread_t id;
+    assert(pthread_create(&id, NULL, worker, NULL) == 0);
+    for (int i = 0; i < M; i++) {
+        if (data % 2 == 0) {
+            printf("data is %d (in progress)\n", data);
+            assert(data % 2 == 0);
+        }
+    }
+    assert(pthread_join(id, NULL) == 0);
+    printf("data is %d\n", data);
+    return 0;
+}
+```
+2. Пересоберите программу и запустите, посмотрите, что выводится.
+3. Запустите под `valgrind`.
+
+### Добавляем snapshot
+1. Прежде чем делать что-то с переменной `data` в цикле главного потока, сохраним её значение в локальную переменную.
+```c++
+#include <assert.h>
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+const int N = 500000000;
+const int M = 10000;
+
+int data;
+void* worker(void*) {
+    for (int i = 0; i < N; i++) {
+        data++;
+    }
+    return NULL;
+}
+
+int main() {
+    pthread_t id;
+    assert(pthread_create(&id, NULL, worker, NULL) == 0);
+    for (int i = 0; i < M; i++) {
+        int data_snapshot = data;
+        if (data_snapshot % 2 == 0) {
+            printf("data is %d (in progress)\n", data_snapshot);
+            assert(data_snapshot % 2 == 0);
+        }
+    }
+    assert(pthread_join(id, NULL) == 0);
+    printf("data is %d\n", data);
+    return 0;
+}
+```
+2. Пересоберите программу и запустите, посмотрите, что выводится.
+3. Запустите под `valgrind`.
+
