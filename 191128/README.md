@@ -30,7 +30,9 @@ int main() {
 ```
 g++ main.cpp -pthread -g -Wall -Wextra -Werror -o main
 ``` 
-    1. При помощи `cmake` 
+
+    2. При помощи `cmake` 
+
  ```
 cmake .
 make
