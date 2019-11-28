@@ -27,14 +27,18 @@ int main() {
 }
 ```
 
-2. Запускать можно одним из следующих способов:
+2. Собрать и запустить можно одним из следующих способов:
     1. Из командной строки при помощи `gcc` (в директории с файлом `main.cpp`). <br/>
- `g++ main.cpp -pthread -g -Wall -Wextra -Werror -o main`
+ `g++ main.cpp -pthread -g -Wall -Wextra -Werror -o main && ./main` 
 
     1. При помощи `cmake`. <br/>
- `cmake . & make`
+ `cmake . && make && ./main`
  
     1. Можно открыть проект в CLion и запустить там.
+ 
+ 3. Чтобы искать гонки данных
+     1. `valgrind --tool=helgrind ./main`
+     1. `valgrind --tool=drd ./main`
 
 ### Простой счётчик
 
