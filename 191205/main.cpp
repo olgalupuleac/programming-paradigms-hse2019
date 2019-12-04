@@ -17,14 +17,14 @@ void *consumer(void *) {
         }
         flag = 0;
     }
-    return NULL;
+    return nullptr;
 }
 
 int main() {
-    pthread_mutex_init(&mutex, NULL);
-    pthread_cond_init(&cond_flag_changed, NULL);
+    pthread_mutex_init(&mutex, nullptr);
+    pthread_cond_init(&cond_flag_changed, nullptr);
     pthread_t id;
-    assert(pthread_create(&id, NULL, consumer, NULL) == 0);
+    assert(pthread_create(&id, nullptr, consumer, nullptr) == 0);
     while (true) {
         int new_flag;
         std::cin >> new_flag;
@@ -36,7 +36,7 @@ int main() {
             break;
         }
     }
-    assert(pthread_join(id, NULL) == 0);
+    assert(pthread_join(id, nullptr) == 0);
     pthread_mutex_destroy(&mutex);
     pthread_cond_destroy(&cond_flag_changed);
     return 0;
