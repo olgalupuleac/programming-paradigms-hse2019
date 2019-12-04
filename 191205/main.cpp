@@ -28,9 +28,6 @@ int main() {
     while (true) {
         int new_flag;
         std::cin >> new_flag;
-        if (new_flag == 0) {
-            continue;
-        }
         flag = new_flag;
         if (new_flag == -1) {
             break;
