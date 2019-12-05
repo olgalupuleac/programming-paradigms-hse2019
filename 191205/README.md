@@ -25,3 +25,8 @@ make
 1. Изменяем `threadsafe_queue_init` и `threadsafe_queue_destroy`
 1. Пока используем только мьютекс, реализуем функции `threadsafe_queue_push` и `threadsafe_queue_try_pop`
 1. Используя условную переменную реализуем `threadsafe_queue_wait_and_pop` и изменяем код `threadsafe_queue_push`
+## P.S.
+1. **Перед тем, как отправить задание, не забудьте запустить** `clang-format -i -style=file src/*`
+1. **Не забудьте добавить вызов** `tsqueue_test` в `.travis.yml`(покажу, как это делать)
+1. Ресурсы должны инициализироваться в том же порядке, в котором они объявлены в структуре, а освобождаться -- в обратном порядке.
+1. Если сделаете `threadsafe_queue_wait_and_pop`, не забудьте из всех тестов убрать `* doctest::skip()`.
