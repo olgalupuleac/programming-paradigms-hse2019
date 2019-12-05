@@ -10,4 +10,11 @@ git fetch upstream
 git merge --ff-only upstream/master
 git checkout -b task04-tsqueue-solution
 ```
-
+Если что-то пошло не так, обращайтесь ко мне:)
+## План
+1. Пишем немногопоточный вариант с использованием уже имеющейся очереди.
+1. Запускаем тесты, понимаем, что не проходят.
+1. Думаем, какие поля нужно ещё добавить в `struct ThreadsafeQueue`.
+1. Изменяем `threadsafe_queue_init` и `threadsafe_queue_destroy`
+1. Пока используем только мьютекс, реализуем функции `threadsafe_queue_push` и `threadsafe_queue_try_pop`
+1. Используя условную переменную реализуем `threadsafe_queue_wait_and_pop` и изменяем код `threadsafe_queue_push`
