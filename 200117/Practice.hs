@@ -3,7 +3,7 @@ import Prelude hiding (head, tail, take, drop)
 -- 1. head' возвращает первый элемент непустого списка
 head' :: [a] -> a
 head' = undefined
--- 2. (*) tail' возвращает список без первого элемента, для пустого - пустой
+-- 2. tail' возвращает список без первого элемента, для пустого - пустой
 tail' :: [a] -> [a]
 tail' = undefined
 -- 3. take' возвращает первые n >= 0 элементов исходного списка
@@ -12,8 +12,11 @@ take' = undefined
 -- 4. filter' возвращает список из элементов, для которых f возвращает True
 filter' :: (a -> Bool) -> [a] -> [a]
 filter' f xs = undefined 
+-- 5. concat' принимает список списков и возвращает один список из тех же элементов
+concat' :: [[a]] -> [a]
+concat' xs = undefined
 
--- 5. Maybe
+-- 6. Maybe
 -- Maybe a - это специальный тип данных, который может принимать либо
 -- значение Nothing, либо значение Just x, где x --- значение типа a.
 -- Его удобно использовать для сообщения об ошибке.
@@ -61,6 +64,6 @@ secondElement xs = case tryTail xs of
 thirdElement :: [a] -> Maybe a
 thirdElement xs = undefined
 
--- 6. Напишите функцию, которая считает число списков, в которых чётное число единичек.
+-- 7. Напишите функцию, которая считает число списков, в которых чётное число единичек.
 evenNumberOfOnes :: [[Int]] -> Int
 evenNumberOfOnes xs = undefined
