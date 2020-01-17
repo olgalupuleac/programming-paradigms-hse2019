@@ -1,20 +1,40 @@
-import Prelude hiding (head, tail, take, drop)
+--import Prelude hiding (tail, take, drop)
 
 -- 1. head' возвращает первый элемент непустого списка
 head' :: [a] -> a
-head' = undefined
+head' (x:_) = x
 -- 2. tail' возвращает список без первого элемента, для пустого - пустой
 tail' :: [a] -> [a]
 tail' = undefined
 -- 3. take' возвращает первые n >= 0 элементов исходного списка
+
 take' :: Int -> [a] -> [a]
-take' = undefined
+take' 0 xs = []
+take' n (x:xs) = x : take' (n - 1) xs
+
+drop' :: Int -> [a] -> [a]
+drop' 0 xs = xs
+drop' n (_:xs) = drop' (n - 1) xs
+
 -- 4. filter' возвращает список из элементов, для которых f возвращает True
 filter' :: (a -> Bool) -> [a] -> [a]
-filter' f xs = undefined 
+filter' f (x:xs) 
+   | match       = x : filter' f xs
+   | otherwise = filter' f xs
+   where match = f x
+{-
+filter' f (x:xs) 
+   | f x       = x : filter' f xs
+   | otherwise = filter' f xs
+-}
+
+filter' _ _ = []
+
 -- 5. concat' принимает список списков и возвращает один список из тех же элементов
 concat' :: [[a]] -> [a]
-concat' xs = undefined
+concat' xs = [y | x <- xs, y <- x]
+
+--concat' ((y:ys) : xs) = y : concat' ys : xs
 
 -- 6. Maybe
 -- Maybe a - это специальный тип данных, который может принимать либо
@@ -62,8 +82,14 @@ secondElement xs = case tryTail xs of
 -- Используя функции tryHead и tryTail, а также сопоставление с
 -- образцом (pattern matching) только для Maybe (но не для списков) реализуйте функцию thirdElement, возвращающую Maybe третий элемент списка.
 thirdElement :: [a] -> Maybe a
-thirdElement xs = undefined
+thirdElement xs = case tryTail xs of
+                     Just a -> case tryTail a of
+                                   Just b  -> tryHead b
+                                   Nothing -> Nothing
+                     Nothing -> Nothing 
 
 -- 7. Напишите функцию, которая считает число списков, в которых чётное число единичек.
 evenNumberOfOnes :: [[Int]] -> Int
-evenNumberOfOnes xs = undefined
+--evenNumberOfOnes xs = length [1 | l <- xs, even $ length $ filter (==1) l]
+evenNumberOfOnes = length . filter (even . length . filter (==1))
+--evenNumberOfOnes xs = length $ filter (even . length . filter (==1)) xs
