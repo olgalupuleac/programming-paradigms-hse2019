@@ -92,5 +92,9 @@ thirdElement xs = case tryTail xs of
 -- 7. Напишите функцию, которая считает число списков, в которых чётное число единичек.
 evenNumberOfOnes :: [[Int]] -> Int
 --evenNumberOfOnes xs = length [1 | l <- xs, even $ length $ filter (==1) l]
-evenNumberOfOnes = length . filter (even . length . filter (==1))
+--evenNumberOfOnes = length . filter (even . length . filter (==1))
 --evenNumberOfOnes xs = length $ filter (even . length . filter (==1)) xs
+-- Если совсем "тупо", то так
+evenNumberOfOnes xs = length (filter (\x -> even (length (filter (==1) x))) xs)
+-- \x -> ... -- это синтаксис лямбд, то есть анонимных функций
+-- Например, \x -> x + 10
