@@ -82,6 +82,7 @@ secondElement xs = case tryTail xs of
 -- Используя функции tryHead и tryTail, а также сопоставление с
 -- образцом (pattern matching) только для Maybe (но не для списков) реализуйте функцию thirdElement, возвращающую Maybe третий элемент списка.
 thirdElement :: [a] -> Maybe a
+-- Так не надо, лучше придумать что-то поизящнее
 thirdElement xs = case tryTail xs of
                      Just a -> case tryTail a of
                                    Just b  -> tryHead b
