@@ -7,23 +7,25 @@
 --   ^ имя  ^ значения
 
 -- Тип фигуры
-data Shape = Circle Float Float Float | Rectangle Float Float Float Float
+-- data Shape a = Circle (Point a) a | Rectangle (Point a) (Point a)
 --                  ^ центр     ^ радиус          ^ противоположные углы
 
 -- Это мы научились класть в фигуры содержимое с помощью конструкторов
 -- Circle :: Float -> Float -> Float -> Shape
 -- Rectangle :: Float -> Float -> Float -> Float -> Shape
 
-surface :: Shape -> Float
-surface (Circle _ _ r) = pi * r ^ 2
-surface (Rectangle x1 y1 x2 y2) = (abs $ x2 - x1) * (abs $ y2 - y1)
+-- surface :: (Num a) => Shape a -> a
+-- surface (Circle _ r) = 3 * r ^ 2
+-- surface (Rectangle (Point x1 y1) (Point x2 y2)) = (abs $ x2 - x1) * (abs $ y2 - y1)
 
 -- Научились извлекать содержимое с помощью pattern matching
 
 -- Упражнения:
 -- * Определить тип Point для декартовых координат и переписать Circle и Rectangle с его использованием
---   data Point
---
+-- data Pair a b = Pair a b
+-- type Point a = Pair a a 
+
+
 -- * Порефакторить surface
 
 -------------------------------
@@ -31,7 +33,7 @@ surface (Rectangle x1 y1 x2 y2) = (abs $ x2 - x1) * (abs $ y2 - y1)
 -------------------------------
 
 -- Определение Maybe в стандартной библиотеке языка
-data Maybe a = Nothing | Just a
+-- data Maybe a = Nothing | Just a
 --   ^ конструктор типа с одним параметром
 
 -- Упражнения:
@@ -45,13 +47,19 @@ data Maybe a = Nothing | Just a
 -- 3. Рекурсивные типы --
 -------------------------
 
-data Tree a = EmptyTree | Node a (Tree a) (Tree a) deriving Show
+data Tree a = EmptyTree | Node a (Tree a) (Tree a) deriving (Show, Read)  
+data Tree' a = Empty | N a [Tree' a] deriving (Show, Read) 
 --                                ^ выражаем тип через себя
+
+tree :: Tree' Int
+tree = N 0 [N 1 [Empty, Empty]]
 
 singleton :: a -> Tree a
 singleton x = Node x EmptyTree EmptyTree
 
 -- обходим и модифицируем дерево
+-- treeInsert :: (Ord a, Num a) => a -> b -> Tree a -> Tree a
+
 treeInsert :: (Ord a) => a -> Tree a -> Tree a
 treeInsert x EmptyTree = singleton x
 treeInsert x (Node a left right)
@@ -67,6 +75,9 @@ treeElem x (Node a left right)
     | x < a  = treeElem x left
     | x > a  = treeElem x right
 
+treeErase :: (Ord a) => a -> Tree a -> Tree a
+treeErase 
+ 
 -- Упражнения:
 -- * Бесконечное дерево
 

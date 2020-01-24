@@ -26,6 +26,16 @@ type FunctionDefinition = (Name, [Name], Body)  -- Имя функции, име
 type State = [(String, Int)]  -- Список пар (имя переменной, значение). Новые значения дописываются в начало, а не перезаписываются
 type Program = ([FunctionDefinition], Body)  -- Все объявленные функции и основное тело программы
 
+prog :: Program
+prog = ([], [Number 1])
+prog' = ([], [Assign "a" (Number 1), 
+              Assign "b" (Number 2), 
+              BinaryOperation Add (Reference "a") (Reference "b")])
+-- f(x):
+--   x = x + 1 
+--
+prog'' = ([("f", ["x"], [Assign "x" (BinaryOperation Add (Reference "x") (Number 1))])], [])
+
 showBinop :: Binop -> String
 showBinop Mul = "*"
 showBinop Div = "/"
@@ -100,7 +110,12 @@ evalExpressionsL = undefined
 
 -- Реализуйте eval: запускает программу и возвращает её значение.
 eval :: Program -> Int
-eval = undefined
+eval p = evalWith p [] 
+    where evalWith :: Program -> State -> (State, Int) 
+
+-- a = 0
+-- (a = a + 1) - (a = a + 3)      // -2
+-- (a = a + 1) 
 
 (/+) = BinaryOperation Add
 (/*) = BinaryOperation Mul
@@ -113,6 +128,10 @@ c = Number
 r = Reference
 call = FunctionCall
 
+
+-- x + y * 7
+-- x + x - y = (x + x) - y
+-- 2 ^ 2 ^ 2 = 2 ^ (2 ^ 2) = 2 ^ 4
 infixl 6 /+
 infixl 6 /-
 infixl 7 /*
@@ -120,7 +139,13 @@ infixr 2 |||
 infix 4 ===
 infixr 1 =:=
 
-program1 = ([("fib", ["a"], [iff ((r "a" === c 0) ||| (r "a" === c 1)) [c 1] [(call "fib" [(r "a" /- c 1)]) /+ (call "fib" [(r "a" /- c 2)])]])], [call "fib" [c 25]])
+program1 = ([("fib", ["a"],
+             [iff ((r "a" === c 0) ||| (r "a" === c 1)) 
+               [c 1] 
+               [(call "fib" [(r "a" /- c 1)]) /+ (call "fib" [(r "a" /- c 2)])]])], 
+             
+             [call "fib" [c 25]])
+
 program2 = ([], ["a" =:= c 10, "b" =:= c 20, r "a" /+ (r "b" /* r "a")])
 program3 = (
     [
@@ -128,6 +153,7 @@ program3 = (
             [
             "a" =:= r "a" /+ c 1,
             "param" =:= r "param" /+ c 1,
+--             4                 7                4
             r "a" /* c 100 /+ r "b" /* c 10 /+ r "param"
             ]
         )
@@ -135,8 +161,12 @@ program3 = (
     [
         "a" =:= c 2,
         "b" =:= c 7,
+--                      int a = 0, b = 0, c = 0;
+--                      f(b = a = 3);
+--                      assert a == 3;
         "res" =:= call "f" ["a" =:= c 3],
         "b" =:= r "b" /+ c 1,
+        
         r "res" /* c 100 /+ r "b" /* c 10 /+ r "a"
     ]
  )
